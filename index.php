@@ -6,8 +6,7 @@
 </head>
 <body>
     
-    <p>ceci est un test : <?php echo $_SESSION['id']; ?><br>
-mon nom est : <?php echo $_SESSION['nom']?>
+    <p>ceci est un test : <a href="PageConnexion.html">Se connecter</a>
 
 </p>
 </body>
