@@ -1,0 +1,37 @@
+-- Table humidité
+CREATE TABLE humidite (
+    id SERIAL PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
+    valeur FLOAT NOT NULL
+);
+
+-- Table température
+CREATE TABLE temperature (
+    id SERIAL PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
+    valeur FLOAT NOT NULL
+);
+
+-- Table lumière
+CREATE TABLE lumiere (
+    id SERIAL PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
+    valeur FLOAT NOT NULL
+);
+
+-- Table utilisateur
+CREATE TABLE utilisateur (
+    id SERIAL PRIMARY KEY,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    role INT NOT NULL
+);
+
+-- Table message
+CREATE TABLE message (
+    id SERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    date TIMESTAMP NOT NULL
+);
