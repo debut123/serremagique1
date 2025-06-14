@@ -2,10 +2,11 @@
 session_start(); // Démarrer la session
 
 // Connexion à la base de données
-$host = 'herogu.garageisep.com';
-$dbname = 'hnlm9aIPvE_serremagiq';
-$username = 'SGnohYwWBz_serremagiq';
-$password = 'HUHQEDeJ1cPu56r9';
+$host = 'sql106.infinityfree.com';
+$dbname = 'if0_39205578_serre_auto'; // remplace XXX par le vrai nom de ta base
+$username = 'if0_39205578';
+$password = 'NGHSb5lMDGG'; // remplace par ton mot de passe réel
+
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
