@@ -13,5 +13,10 @@
 </p>
 
 <a href="occurence.php">Test de connection database</a>
+
+<?php
+print_r(PDO::getAvailableDrivers());
+?>
+
 </body>
 </html>
