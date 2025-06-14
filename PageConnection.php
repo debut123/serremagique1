@@ -1,32 +1,32 @@
 <?php
 session_start();
 
-$host = 'aws-0-eu-west-2.pooler.supabase.com'; // IPv4 compatible
+$host = 'aws-0-eu-west-2.pooler.supabase.com';
 $port = 5432;
 $dbname = 'postgres';
-$user = 'postgres.lhhdtpwficaykinzrlaq'; // bien noter le sous-identifiant ici
+$user = 'postgres.lhhdtpwficaykinzrlaq';
 $password = 'afehz:resliuhbhbmqauh:ghb?';
 
 try {
     $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
     $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connexion réussie à PostgreSQL !";
+    // Connexion réussie, on n'affiche rien pour éviter d'envoyer du contenu avant header()
 } catch (PDOException $e) {
-    echo "Erreur de connexion : " . $e->getMessage();
+    // Affiche l'erreur puis stoppe le script
+    die("Erreur de connexion : " . $e->getMessage());
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $mot_de_passe = $_POST['mot_de_passe'] ?? '';
 
-    // Requête pour récupérer l'utilisateur par email
     $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE email = ?");
     $stmt->execute([$email]);
     $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($utilisateur) {
-        // ⚠️ En production, utilise password_verify au lieu de comparaison en clair
+        // ⚠️ En production, utilise password_verify pour les mots de passe hashés
         if ($mot_de_passe === $utilisateur['mot_de_passe']) {
             $_SESSION['id'] = $utilisateur['id'];
             $_SESSION['nom'] = $utilisateur['nom'];
@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
