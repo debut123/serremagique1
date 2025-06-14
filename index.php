@@ -12,6 +12,6 @@
 
 </p>
 
-<a href="occurence.php">Se connecter</a>
+<a href="occurence.php">Test de connection database</a>
 </body>
 </html>
