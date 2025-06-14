@@ -1,48 +1,42 @@
 <?php
-session_start(); // Démarrer la session
-$host = 'db.lhhdtpwficaykinzrlaq.supabase.co';
+session_start(); // Démarre la session
+
+$host = 'aws-0-eu-west-2.pooler.supabase.com';
 $port = 5432;
 $dbname = 'postgres';
-$user = 'postgres';
+$user = 'postgres.lhhdtpwficaykinzrlaq';
 $password = 'afehz:resliuhbhbmqauh:ghb?';
 
 try {
     $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
     $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connexion réussie !";
+    // echo "Connexion réussie !";
 } catch (PDOException $e) {
     echo "Erreur de connexion : " . $e->getMessage();
+    exit;
 }
 
-// Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $mot_de_passe = $_POST['mot_de_passe'] ?? '';
 
-    // Requête pour récupérer l'utilisateur
+    // Requête pour récupérer l'utilisateur par email
     $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE email = ?");
     $stmt->execute([$email]);
     $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($utilisateur) {
-        // Vérification du mot de passe (en clair — à sécuriser avec password_verify en prod)
+        // ⚠️ En production, utilise password_verify au lieu de comparaison en clair
         if ($mot_de_passe === $utilisateur['mot_de_passe']) {
-            // Stocker les infos dans la session
             $_SESSION['id'] = $utilisateur['id'];
             $_SESSION['nom'] = $utilisateur['nom'];
             $_SESSION['prenom'] = $utilisateur['prenom'];
             $_SESSION['email'] = $utilisateur['email'];
             $_SESSION['role'] = $utilisateur['role'];
 
-            echo "<p style='color:green;'>Connexion réussie. Bienvenue " . htmlspecialchars($_SESSION['prenom']) . " " . htmlspecialchars($_SESSION['nom']) . " !</p>";
-
-            // Redirection possible vers une page d'accueil protégée :
-            // header("Location: accueil.php");
             header("Location: Accueil.php");
-exit;
-
-            // exit;
+            exit;
         } else {
             echo "<p style='color:red;'>Mot de passe incorrect.</p>";
         }
@@ -51,6 +45,7 @@ exit;
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
