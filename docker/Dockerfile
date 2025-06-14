@@ -2,14 +2,11 @@ FROM ghcr.io/garage-isep/herogu-back/herogu-php-base
 
 USER root
 
-# Installer pdo_pgsql
-RUN apt-get update && apt-get install -y libpq-dev \
-    && docker-php-ext-install pdo_pgsql pgsql
-
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+
 COPY --chown=nginx:www-data --chmod=777 . /var/www/html
 
 LABEL ORIGIN herogu.garageisep.com
-LABEL org.opencontainers.image.source https://github.com/debut123/serremagique1
 
 EXPOSE 80
+LABEL org.opencontainers.image.source https://github.com/debut123/serremagique1
