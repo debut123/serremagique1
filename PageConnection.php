@@ -1,18 +1,18 @@
 <?php
 session_start(); // Démarrer la session
-
-// Connexion à la base de données
-$host = 'sql106.infinityfree.com';
-$dbname = 'if0_39205578_serre_auto'; // remplace XXX par le vrai nom de ta base
-$username = 'if0_39205578';
-$password = 'NGHSb5lMDGG'; // remplace par ton mot de passe réel
-
+$host = 'db.lhhdtpwficaykinzrlaq.supabase.co';
+$port = 5432;
+$dbname = 'postgres';
+$user = 'postgres';
+$password = 'afehz:resliuhbhbmqauh:ghb?';
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
+    $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connexion réussie !";
 } catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
+    echo "Erreur de connexion : " . $e->getMessage();
 }
 
 // Traitement du formulaire
