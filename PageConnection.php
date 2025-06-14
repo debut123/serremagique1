@@ -1,20 +1,19 @@
 <?php
-session_start(); // Démarre la session
+session_start();
 
-$host = 'aws-0-eu-west-2.pooler.supabase.com';
+$host = 'aws-0-eu-west-2.pooler.supabase.com'; // IPv4 compatible
 $port = 5432;
 $dbname = 'postgres';
-$user = 'postgres.lhhdtpwficaykinzrlaq';
+$user = 'postgres.lhhdtpwficaykinzrlaq'; // bien noter le sous-identifiant ici
 $password = 'afehz:resliuhbhbmqauh:ghb?';
 
 try {
     $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
     $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connexion réussie !";
+    echo "Connexion réussie à PostgreSQL !";
 } catch (PDOException $e) {
     echo "Erreur de connexion : " . $e->getMessage();
-    exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
