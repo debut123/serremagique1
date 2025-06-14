@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['email'] = $utilisateur['email'];
             $_SESSION['role'] = $utilisateur['role'];
 
-            header("Location: Accueil.php");
+            header("Location: accueil.php");
             exit;
         } else {
             echo "<p style='color:red;'>Mot de passe incorrect.</p>";
