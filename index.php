@@ -8,6 +8,10 @@
     
     <p>ceci est un test : <a href="test.php">Se connecter</a>
 
+
+
 </p>
+
+<a href="occurence.php">Se connecter</a>
 </body>
 </html>
